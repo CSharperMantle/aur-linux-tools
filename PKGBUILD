@@ -32,7 +32,7 @@ build() {
 }
 
 package_perf() {
-  pkgdesc='Linux kernel perf tool'
+  pkgdesc='Linux kernel performance auditing tool'
   depends=('python2' 'libnewt' 'elfutils')
 
   cd linux-${pkgver}/tools/perf
@@ -41,7 +41,7 @@ package_perf() {
 }
 
 package_cpupower() {
-  pkgdesc='Linux kernel power tool'
+  pkgdesc='Linux kernel tool to examine and tune power saving related features of your processor'
   backup=('etc/conf.d/cpupower')
   depends=('pciutils')
   conflicts=('cpufrequtils')
