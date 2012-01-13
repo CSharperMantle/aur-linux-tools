@@ -1,4 +1,4 @@
-# Maintainer: Sebastien Luttringer <seblu+arch@seblu.net>
+# Maintainer: Sébastien Luttringer <seblu@aur.archlinux.org>
 
 pkgbase=linux-tools
 pkgname=('perf' 'cpupower')
