@@ -34,6 +34,7 @@ build() {
     DESTDIR="$pkgdir/usr" \
     perfexecdir="lib/$pkgname" \
     PYTHON=python2 \
+    NO_GTK2=1 \
     PERF_VERSION=$pkgver-$pkgrel \
     all man
   popd
@@ -54,6 +55,7 @@ package_perf() {
     DESTDIR="$pkgdir/usr" \
     perfexecdir="lib/$pkgname" \
     PYTHON=python2 \
+    NO_GTK2=1 \
     PERF_VERSION=$pkgver-$pkgrel \
     install install-man
 }
