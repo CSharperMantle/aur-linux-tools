@@ -2,7 +2,6 @@
 
 pkgbase=linux-tools
 pkgname=('libtraceevent' 'perf' 'cpupower' 'x86_energy_perf_policy' 'usbip')
-[[ $CARCH == i686 ]] && pkgname+=('lguest')
 pkgver=3.7
 pkgrel=2
 license=('GPL2')
@@ -81,13 +80,6 @@ build() {
   ./configure --prefix=/usr
   make
   popd
-
-  if [[ $CARCH == i686 ]]; then
-    msg2 'Build lguest'
-    pushd linux-$pkgver/tools/lguest
-    make
-    popd
-  fi
 }
 
 package_libtraceevent() {
@@ -158,13 +150,6 @@ package_usbip() {
   install -Dm 755 usbipd.rc "$pkgdir/etc/rc.d/usbipd"
   install -Dm 644 usbipd.conf "$pkgdir/etc/conf.d/usbipd"
   install -Dm 644 usbipd.service "$pkgdir/usr/lib/systemd/system/usbipd.service"
-}
-
-package_lguest() {
-  pkgdesc='The simple x86 hypervisor'
-
-  cd linux-$pkgver/tools/lguest
-  install -Dm 755 lguest "$pkgdir/usr/bin/lguest"
 }
 
 # vim:set ts=2 sw=2 et:
