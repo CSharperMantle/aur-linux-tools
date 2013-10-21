@@ -8,7 +8,7 @@ pkgname=('linux-tools-meta'
          'x86_energy_perf_policy'
          'usbip')
 pkgver=3.11
-pkgrel=1
+pkgrel=2
 license=('GPL2')
 arch=('i686' 'x86_64')
 url='http://www.kernel.org'
@@ -150,7 +150,6 @@ package_x86_energy_perf_policy() {
 package_usbip() {
   pkgdesc='An USB device sharing system over IP network'
   depends=('glib2' 'sysfsutils')
-  options=('!libtool')
 
   pushd linux-$pkgver/drivers/staging/usbip/userspace
   make install DESTDIR="$pkgdir"
