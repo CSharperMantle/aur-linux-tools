@@ -13,7 +13,7 @@ pkgname=(
   'x86_energy_perf_policy'
 )
 pkgver=3.14
-pkgrel=1
+pkgrel=2
 license=('GPL2')
 arch=('i686' 'x86_64')
 url='http://www.kernel.org'
@@ -22,7 +22,7 @@ options=('!strip')
 # kernel source deps
 makedepends=('asciidoc' 'xmlto')
 # perf deps
-makedepends+=('perl' 'python2' 'libnewt' 'elfutils' 'audit' 'libunwind' 'numactl')
+makedepends+=('perl' 'python2' 'libnewt' 'elfutils' 'libunwind' 'numactl')
 # cpupower deps
 makedepends+=('pciutils')
 # usbip deps
@@ -137,7 +137,7 @@ package_libtraceevent() {
 
 package_perf() {
   pkgdesc='Linux kernel performance auditing tool'
-  depends=('perl' 'python2' 'libnewt' 'elfutils' 'audit' 'libunwind' 'binutils'
+  depends=('perl' 'python2' 'libnewt' 'elfutils' 'libunwind' 'binutils'
            'numactl')
 
   cd linux-$pkgver/tools/perf
