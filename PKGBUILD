@@ -122,7 +122,6 @@ package_linux-tools-meta() {
     'cgroup_event_listener'
     'cpupower'
     'libtraceevent'
-    'linux-tools-meta'
     'perf'
     'tmon'
     'usbip'
