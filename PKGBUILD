@@ -2,7 +2,6 @@
 
 pkgbase=linux-tools
 pkgname=(
-  'acpidump'
   'cgroup_event_listener'
   'cpupower'
   'libtraceevent'
@@ -14,7 +13,7 @@ pkgname=(
   'x86_energy_perf_policy'
 )
 pkgver=4.0
-pkgrel=2
+pkgrel=3
 license=('GPL2')
 arch=('i686' 'x86_64')
 url='http://www.kernel.org'
@@ -105,11 +104,6 @@ build() {
   make
   popd
 
-  msg2 'acpidump'
-  pushd linux-$pkgver/tools/power/acpi
-  make
-  popd
-
   msg2 'cgroup_event_listener'
   pushd linux-$pkgver/tools/cgroup
   make
@@ -125,7 +119,6 @@ package_linux-tools-meta() {
   pkgdesc='Linux kernel tools meta package'
   groups=()
   depends=(
-    'acpidump'
     'cgroup_event_listener'
     'cpupower'
     'libtraceevent'
@@ -134,6 +127,9 @@ package_linux-tools-meta() {
     'turbostat'
     'usbip'
     'x86_energy_perf_policy'
+  )
+  conflicts=(
+    'acpidump'
   )
 }
 
@@ -218,17 +214,6 @@ package_tmon() {
 
   cd linux-$pkgver/tools/thermal/tmon
   make install INSTALL_ROOT="$pkgdir"
-}
-
-package_acpidump() {
-  pkgdesc='Dump system ACPI tables to an ASCII file'
-  depends=('glibc')
-  conflicts=('iasl')
-
-  cd linux-$pkgver/tools/power/acpi
-  make install sbindir=/usr/bin mandir=/usr/share/man DESTDIR="$pkgdir"
-  #install -Dm755 acpidump "$pkgdir/usr/bin/acpidump"
-  #install -Dm644 acpidump.8 "$pkgdir/usr/share/man/man8/acpidump.8"
 }
 
 package_cgroup_event_listener() {
