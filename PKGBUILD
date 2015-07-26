@@ -13,7 +13,7 @@ pkgname=(
   'x86_energy_perf_policy'
 )
 pkgver=4.1
-pkgrel=1
+pkgrel=3
 license=('GPL2')
 arch=('i686' 'x86_64')
 url='http://www.kernel.org'
@@ -22,7 +22,7 @@ options=('!strip')
 # kernel source deps
 makedepends=('asciidoc' 'xmlto')
 # perf deps
-makedepends+=('perl' 'python2' 'libnewt' 'elfutils' 'libunwind' 'numactl' 'audit')
+makedepends+=('perl' 'python2' 'libnewt' 'elfutils' 'libunwind' 'numactl' 'audit' 'gtk2')
 # cpupower deps
 makedepends+=('pciutils')
 # usbip deps
@@ -73,7 +73,6 @@ build() {
     perfexecdir='lib/perf' \
     PYTHON=python2 \
     PYTHON_CONFIG=python2-config \
-    NO_GTK2=1 \
     PERF_VERSION=$pkgver-$pkgrel \
     all man
   popd
@@ -144,6 +143,7 @@ package_perf() {
   pkgdesc='Linux kernel performance auditing tool'
   depends=('perl' 'python2' 'libnewt' 'elfutils' 'libunwind' 'binutils'
            'numactl' 'audit')
+  optdepends=('gtk2: support GTK2 browser for perf report')
 
   cd linux-$pkgver/tools/perf
   make \
@@ -152,7 +152,6 @@ package_perf() {
     perfexecdir='lib/perf' \
     PYTHON=python2 \
     PYTHON_CONFIG=python2-config \
-    NO_GTK2=1 \
     PERF_VERSION=$pkgver-$pkgrel \
     install install-man
   # move completion in new directory
