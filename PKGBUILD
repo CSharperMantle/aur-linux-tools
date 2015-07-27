@@ -13,7 +13,7 @@ pkgname=(
   'x86_energy_perf_policy'
 )
 pkgver=4.1
-pkgrel=3
+pkgrel=4
 license=('GPL2')
 arch=('i686' 'x86_64')
 url='http://www.kernel.org'
@@ -156,7 +156,7 @@ package_perf() {
     install install-man
   # move completion in new directory
   cd "$pkgdir"
-  install -Dm644 usr/etc/bash_completion.d/perf usr/share/bash-completion/perf
+  install -Dm644 usr/etc/bash_completion.d/perf usr/share/bash-completion/completions/perf
   rm -r usr/etc
 }
 
