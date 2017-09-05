@@ -131,6 +131,7 @@ package_linux-tools-meta() {
   depends=(
     'cgroup_event_listener'
     'cpupower'
+    'hyperv'
     'libtraceevent'
     'perf'
     'tmon'
