@@ -13,7 +13,7 @@ pkgname=(
   'usbip'
   'x86_energy_perf_policy'
 )
-pkgver=4.14
+pkgver=4.15
 pkgrel=1
 license=('GPL2')
 arch=('x86_64')
@@ -87,8 +87,6 @@ build() {
 
   msg2 'cpupower'
   pushd linux/tools/power/cpupower
-  # we cannot use --as-needed
-  #LDFLAGS=${LDFLAGS:+"$LDFLAGS,--no-as-needed"}
   make VERSION=$pkgver-$pkgrel
   popd
 
@@ -193,6 +191,7 @@ package_cpupower() {
   make \
     DESTDIR="$pkgdir" \
     sbindir='/usr/bin' \
+    libdir='/usr/lib' \
     mandir='/usr/share/man' \
     docdir='/usr/share/doc/cpupower' \
     install install-man
