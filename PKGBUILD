@@ -174,7 +174,7 @@ package_perf() {
   pkgdesc='Linux kernel performance auditing tool'
   depends=('glibc' 'perl' 'python' 'slang' 'elfutils' 'libunwind' 'binutils'
            'numactl' 'audit' 'coreutils' 'glib2' 'xz' 'zlib' 'libelf' 'bash'
-           'zstd' 'libcap' 'libtraceevent' 'openssl')
+           'zstd' 'libcap' 'libtraceevent' 'openssl' 'libsframe.so')
 
   cd linux/tools/perf
   make -f Makefile.perf \
@@ -282,7 +282,7 @@ package_hyperv() {
 
 package_bpf() {
   pkgdesc='BPF tools'
-  depends=('glibc' 'readline' 'zlib' 'libelf' 'libcap' 'zstd' 'llvm-libs' 'binutils')
+  depends=('glibc' 'readline' 'zlib' 'libelf' 'libcap' 'zstd' 'llvm-libs' 'binutils' 'libsframe.so')
 
   cd linux/tools/bpf
   # skip runsqlower until disabled in build
