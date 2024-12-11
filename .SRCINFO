@@ -1,6 +1,6 @@
 pkgbase = linux-tools
 	pkgver = 6.12
-	pkgrel = 2
+	pkgrel = 3
 	url = https://www.kernel.org
 	arch = x86_64
 	groups = linux-tools
@@ -21,6 +21,7 @@ pkgbase = linux-tools
 	makedepends = libtraceevent
 	makedepends = openssl
 	makedepends = clang
+	makedepends = llvm-libs
 	makedepends = pciutils
 	makedepends = glib2
 	makedepends = sysfsutils
@@ -119,6 +120,7 @@ pkgname = perf
 	depends = libtraceevent
 	depends = openssl
 	depends = libsframe.so
+	depends = llvm-libs
 
 pkgname = tmon
 	pkgdesc = Monitoring and Testing Tool for Linux kernel thermal subsystem
