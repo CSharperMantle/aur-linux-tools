@@ -91,6 +91,7 @@ build() {
     NO_SDT=1 \
     BUILD_BPF_SKEL=1 \
     PYTHON=python \
+    NO_LIBLLVM=1 \
     PYTHON_CONFIG=python-config \
     DESTDIR="$pkgdir"
   popd
@@ -178,6 +179,7 @@ package_perf() {
     NO_SDT=1 \
     BUILD_BPF_SKEL=1 \
     PYTHON=python \
+    NO_LIBLLVM=1 \
     PYTHON_CONFIG=python-config \
     DESTDIR="$pkgdir" \
     install install-python_ext
