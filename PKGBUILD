@@ -26,7 +26,7 @@ makedepends=('git')
 makedepends+=('asciidoc' 'xmlto')
 # perf deps
 makedepends+=('perl' 'python' 'python-setuptools' 'slang' 'elfutils' 'libunwind'
-  'numactl' 'audit' 'zstd' 'libcap' 'libtraceevent' 'openssl' 'clang' 'llvm-libs')
+  'numactl' 'audit' 'zstd' 'libcap' 'libtraceevent' 'openssl' 'clang' 'llvm-libs' 'libpfm')
 # cpupower deps
 makedepends+=('pciutils')
 # usbip deps
@@ -96,6 +96,7 @@ build() {
     PYTHON=python \
     NO_LIBLLVM=1 \
     PYTHON_CONFIG=python-config \
+    LIBPFM4=1 \
     DESTDIR="$pkgdir"
   popd
 
@@ -177,7 +178,7 @@ package_perf() {
   pkgdesc='Linux kernel performance auditing tool'
   depends=('glibc' 'perl' 'python' 'slang' 'elfutils' 'libunwind' 'binutils'
            'numactl' 'audit' 'coreutils' 'glib2' 'xz' 'zlib' 'libelf' 'bash'
-           'zstd' 'libcap' 'libtraceevent' 'openssl' 'libsframe.so' 'llvm-libs')
+           'zstd' 'libcap' 'libtraceevent' 'openssl' 'libsframe.so' 'llvm-libs' 'libpfm')
 
   cd linux/tools/perf
   make -f Makefile.perf \
@@ -191,6 +192,7 @@ package_perf() {
     NO_LIBLLVM=1 \
     PYTHON_CONFIG=python-config \
     DESTDIR="$pkgdir" \
+    LIBPFM4=1 \
     install install-python_ext
   cd "$pkgdir"
   # add linker search path
