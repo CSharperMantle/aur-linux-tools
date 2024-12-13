@@ -35,6 +35,7 @@ pkgbase = linux-tools
 	makedepends = libcap
 	makedepends = llvm
 	makedepends = clang
+	makedepends = libnl
 	options = !strip
 	options = !lto
 	source = git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v6.12?signed
@@ -96,6 +97,7 @@ pkgname = linux-tools-meta
 	depends = turbostat
 	depends = usbip
 	depends = x86_energy_perf_policy
+	depends = intel-speed-select
 	conflicts = acpidump
 
 pkgname = perf
@@ -142,3 +144,7 @@ pkgname = usbip
 pkgname = x86_energy_perf_policy
 	pkgdesc = Read or write MSR_IA32_ENERGY_PERF_BIAS
 	depends = glibc
+
+pkgname = intel-speed-select
+	pkgdesc = Intel Speed Select
+	depends = libnl

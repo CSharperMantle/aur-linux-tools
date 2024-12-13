@@ -12,6 +12,7 @@ pkgname=(
   'turbostat'
   'usbip'
   'x86_energy_perf_policy'
+  'intel-speed-select'
 )
 pkgver=6.12
 pkgrel=6
@@ -38,6 +39,8 @@ makedepends+=('readline' 'zlib' 'libelf' 'libcap' 'python-docutils')
 makedepends+=('libcap')
 # bpftool
 makedepends+=('llvm' 'clang')
+# intel-speed-select
+makedepends+=('libnl')
 groups=("$pkgbase")
 source=("git+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git#tag=v${pkgver//_/-}?signed"
 #        "https://cdn.kernel.org/pub/linux/kernel/v6.x/patch-$pkgver.2.xz"
@@ -143,6 +146,11 @@ build() {
   pushd linux/tools/bootconfig
   make
   popd
+
+  echo ':: intel-speed-select'
+  pushd linux/tools/power/x86/intel-speed-select
+  make
+  popd
 }
 
 package_linux-tools-meta() {
@@ -158,6 +166,7 @@ package_linux-tools-meta() {
     'turbostat'
     'usbip'
     'x86_energy_perf_policy'
+    'intel-speed-select'
   )
   conflicts=(
     'acpidump'
@@ -287,6 +296,14 @@ package_bootconfig() {
 
   cd linux/tools/bootconfig
   install -dm755 "$pkgdir/usr/bin"
+  make install DESTDIR="$pkgdir"
+}
+
+package_intel-speed-select() {
+  pkgdesc='Intel Speed Select'
+  depends=('libnl')
+
+  cd linux/tools/power/x86/intel-speed-select
   make install DESTDIR="$pkgdir"
 }
 
