@@ -88,6 +88,10 @@ pkgname = hyperv
 	pkgdesc = Hyper-V tools
 	depends = glibc
 
+pkgname = kcpuid
+	pkgdesc = Kernel tool for various cpu debug outputs
+	depends = glibc
+
 pkgname = linux-tools-meta
 	pkgdesc = Linux kernel tools meta package
 	groups = 
@@ -95,6 +99,7 @@ pkgname = linux-tools-meta
 	depends = bpf
 	depends = cpupower
 	depends = hyperv
+	depends = kcpuid
 	depends = perf
 	depends = tmon
 	depends = turbostat
