@@ -6,6 +6,7 @@ pkgname=(
   'bpf'
   'cpupower'
   'hyperv'
+  'intel-speed-select'
   'kcpuid'
   'linux-tools-meta'
   'perf'
@@ -13,7 +14,6 @@ pkgname=(
   'turbostat'
   'usbip'
   'x86_energy_perf_policy'
-  'intel-speed-select'
 )
 pkgver=6.12
 pkgrel=10
@@ -170,13 +170,13 @@ package_linux-tools-meta() {
     'bpf'
     'cpupower'
     'hyperv'
+    'intel-speed-select'
     'kcpuid'
     'perf'
     'tmon'
     'turbostat'
     'usbip'
     'x86_energy_perf_policy'
-    'intel-speed-select'
   )
   conflicts=(
     'acpidump'
