@@ -6,21 +6,16 @@ pkgname=(
   'bootconfig'
   'bpf'
   'cpupower'
-  'hyperv'
-  'intel-speed-select'
-  'kcpuid'
   'linux-tools-meta'
   'perf'
   'tmon'
-  'turbostat'
   'usbip'
-  'x86_energy_perf_policy'
 )
 pkgver=6.19.11
 pkgrel=1
 _srcname=linux-${pkgver}
 license=('GPL-2.0-only')
-arch=('x86_64')
+arch=('x86_64' 'loong64')
 url='https://www.kernel.org'
 options=('!strip' '!lto')
 makedepends=('git')
@@ -39,11 +34,11 @@ makedepends+=('ncurses')
 # bpf deps
 makedepends+=('readline' 'zlib' 'libelf' 'libcap' 'python-docutils')
 # turbostat deps
-makedepends+=('libcap')
+# makedepends+=('libcap')
 # bpftool
 makedepends+=('llvm' 'clang')
 # intel-speed-select
-makedepends+=('libnl')
+# makedepends+=('libnl')
 groups=("$pkgbase")
 source=(https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar.{xz,sign}
         'usbipd.service'
@@ -104,10 +99,13 @@ build() {
   make VERSION=$pkgver-$pkgrel
   popd
 
+  # Use a "multi-line comment" to keep patch from rotting
+  : <<COMMENT_SEPARATOR
   echo ':: x86_energy_perf_policy'
   pushd "$_srcname"/tools/power/x86/x86_energy_perf_policy
   make
   popd
+COMMENT_SEPARATOR
 
   echo ':: usbip'
   pushd "$_srcname"/tools/usb/usbip
@@ -123,6 +121,7 @@ build() {
   make
   popd
 
+  : <<COMMENT_SEPARATOR
   echo ':: turbostat'
   pushd "$_srcname"/tools/power/x86/turbostat
   make
@@ -132,6 +131,7 @@ build() {
   pushd "$_srcname"/tools/hv
   CFLAGS+=' -DKVP_SCRIPTS_PATH=\"/usr/lib/hypervkvpd/\"' make
   popd
+COMMENT_SEPARATOR
 
   echo ':: bpf'
   pushd "$_srcname"/tools/bpf
@@ -147,6 +147,7 @@ build() {
   make
   popd
 
+  : <<COMMENT_SEPARATOR
   echo ':: intel-speed-select'
   pushd "$_srcname"/tools/power/x86/intel-speed-select
   make
@@ -156,6 +157,7 @@ build() {
   pushd "$_srcname"/tools/arch/x86/kcpuid
   make
   popd
+COMMENT_SEPARATOR
 }
 
 package_linux-tools-meta() {
@@ -165,14 +167,9 @@ package_linux-tools-meta() {
     'bootconfig'
     'bpf'
     'cpupower'
-    'hyperv'
-    'intel-speed-select'
-    'kcpuid'
     'perf'
     'tmon'
-    'turbostat'
     'usbip'
-    'x86_energy_perf_policy'
   )
   conflicts=(
     'acpidump'
@@ -190,7 +187,7 @@ package_perf() {
     prefix=/usr \
     lib=lib/perf \
     perfexecdir=lib/perf \
-    EXTRA_CFLAGS=' -Wno-error=bad-function-cast -Wno-error=declaration-after-statement -Wno-error=switch-enum -Wno-error=discarded-qualifiers' \
+    EXTRA_CFLAGS=' -Wno-error=bad-function-cast -Wno-error=declaration-after-statement -Wno-error=switch-enum -Wno-error=discarded-qualifiers -Wno-error=aggressive-loop-optimizations -Wno-error=unterminated-string-initialization' \
     NO_SDT=1 \
     BUILD_BPF_SKEL=1 \
     PYTHON=python \
