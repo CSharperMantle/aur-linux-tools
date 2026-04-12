@@ -12,7 +12,7 @@ pkgname=(
   'usbip'
 )
 pkgver=6.19.11
-pkgrel=1
+pkgrel=2
 _srcname=linux-${pkgver}
 license=('GPL-2.0-only')
 arch=('x86_64' 'loong64')
@@ -44,6 +44,7 @@ source=(https://cdn.kernel.org/pub/linux/kernel/v${pkgver%%.*}.x/${_srcname}.tar
         'usbipd.service'
         'hv_kvp_daemon.service'
         'hv_vss_daemon.service'
+        '0001-perf-annotate-Use-jump__delete-when-freeing-LoongArc.patch'
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -53,7 +54,8 @@ sha256sums=('20039d7b6b256c08be2f8fac43c3ff9a620308c703c643cf2f80c3910b9bd59b'
             'SKIP'
             '2e187734d8aec58a3046d79883510d779aa93fb3ab20bd3132c1a607ebe5498f'
             'b1315cb77a35454e1af9172f821a52e2a0cb18561be05a340d21cf337b01ae61'
-            '2d5e2f8d40b6f19bf2e1dead57ca105d72098fb0b418c09ff2e0cb91089710af')
+            '2d5e2f8d40b6f19bf2e1dead57ca105d72098fb0b418c09ff2e0cb91089710af'
+            'ad7f3c4d745fadd2da49621e07a68c68d467b2e9206cd6a2b8ab3c7d04ac7eea')
 
 prepare() {
   cd "$_srcname"
