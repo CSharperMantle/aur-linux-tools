@@ -1,6 +1,6 @@
 pkgbase = linux-tools
 	pkgver = 7.0
-	pkgrel = 1
+	pkgrel = 2
 	url = https://www.kernel.org
 	arch = x86_64
 	groups = linux-tools
@@ -20,8 +20,8 @@ pkgbase = linux-tools
 	makedepends = libcap
 	makedepends = libtraceevent
 	makedepends = openssl
-	makedepends = clang
-	makedepends = llvm-libs
+	makedepends = clang21
+	makedepends = llvm21-libs
 	makedepends = libpfm
 	makedepends = pciutils
 	makedepends = glib2
@@ -64,7 +64,7 @@ pkgname = bpf
 	depends = libelf
 	depends = libcap
 	depends = zstd
-	depends = llvm-libs
+	depends = llvm21-libs
 	depends = binutils
 	depends = libsframe.so
 
@@ -128,7 +128,7 @@ pkgname = perf
 	depends = libtraceevent
 	depends = openssl
 	depends = libsframe.so
-	depends = llvm-libs
+	depends = llvm21-libs
 	depends = libpfm
 
 pkgname = tmon

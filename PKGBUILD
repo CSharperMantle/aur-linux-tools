@@ -17,7 +17,7 @@ pkgname=(
   'x86_energy_perf_policy'
 )
 pkgver=7.0
-pkgrel=1
+pkgrel=2
 _srcname=linux-${pkgver}
 license=('GPL-2.0-only')
 arch=('x86_64')
@@ -29,7 +29,7 @@ makedepends=('git')
 makedepends+=('asciidoc' 'xmlto')
 # perf deps
 makedepends+=('perl' 'python' 'python-setuptools' 'slang' 'elfutils' 'libunwind'
-  'numactl' 'audit' 'zstd' 'libcap' 'libtraceevent' 'openssl' 'clang' 'llvm-libs' 'libpfm')
+  'numactl' 'audit' 'zstd' 'libcap' 'libtraceevent' 'openssl' 'clang21' 'llvm21-libs' 'libpfm')
 # cpupower deps
 makedepends+=('pciutils')
 # usbip deps
@@ -96,7 +96,8 @@ build() {
     NO_LIBLLVM=1 \
     PYTHON_CONFIG=python-config \
     LIBPFM4=1 \
-    DESTDIR="$pkgdir"
+    DESTDIR="$pkgdir" \
+    CLANG=/usr/lib/llvm21/bin/clang
   popd
 
   echo ':: cpupower'
@@ -184,7 +185,7 @@ package_perf() {
   pkgdesc='Linux kernel performance auditing tool'
   depends=('glibc' 'perl' 'python' 'slang' 'elfutils' 'libunwind' 'binutils'
            'numactl' 'audit' 'coreutils' 'glib2' 'xz' 'zlib' 'libelf' 'bash'
-           'zstd' 'libcap' 'libtraceevent' 'openssl' 'libsframe.so' 'llvm-libs' 'libpfm')
+           'zstd' 'libcap' 'libtraceevent' 'openssl' 'libsframe.so' 'llvm21-libs' 'libpfm')
 
   cd "$_srcname"/tools/perf
   make -f Makefile.perf \
@@ -284,7 +285,7 @@ package_hyperv() {
 
 package_bpf() {
   pkgdesc='BPF tools'
-  depends=('glibc' 'readline' 'zlib' 'libelf' 'libcap' 'zstd' 'llvm-libs' 'binutils' 'libsframe.so')
+  depends=('glibc' 'readline' 'zlib' 'libelf' 'libcap' 'zstd' 'llvm21-libs' 'binutils' 'libsframe.so')
 
   cd "$_srcname"/tools/bpf
   # skip runsqlower until disabled in build
