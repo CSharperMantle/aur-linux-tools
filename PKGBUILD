@@ -11,7 +11,7 @@ pkgname=(
   'tmon'
   'usbip'
 )
-pkgver=6.19.11
+pkgver=6.19.12
 pkgrel=2
 _srcname=linux-${pkgver}
 license=('GPL-2.0-only')
@@ -50,7 +50,7 @@ validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
 )
-sha256sums=('20039d7b6b256c08be2f8fac43c3ff9a620308c703c643cf2f80c3910b9bd59b'
+sha256sums=('ce5c4f1205f9729286b569b037649591555f31ca1e03cc504bd3b70b8e58a8d5'
             'SKIP'
             '2e187734d8aec58a3046d79883510d779aa93fb3ab20bd3132c1a607ebe5498f'
             'b1315cb77a35454e1af9172f821a52e2a0cb18561be05a340d21cf337b01ae61'
