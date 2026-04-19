@@ -1,7 +1,8 @@
-From 0e5a9680b9710d13d0ec358fbd193dca76412a54 Mon Sep 17 00:00:00 2001
+From 248d046b69bac5cf8faa74e651fc1318b8c9716d Mon Sep 17 00:00:00 2001
 From: Rong Bao <rong.bao@csmantle.top>
 Date: Sun, 12 Apr 2026 10:18:08 +0800
-Subject: [PATCH] perf annotate: Use jump__delete when freeing LoongArch jumps
+Subject: [PATCH 69/69] BACKPORT: FROMLIST: perf annotate: Use jump__delete
+ when freeing LoongArch jumps
 
 Currently, the initialization of loongarch_jump_ops does not contain an
 assignment to its .free field. This causes disasm_line__free() to fall
@@ -71,13 +72,15 @@ Cc: Huacai Chen <chenhuacai@kernel.org>
 Cc: WANG Xuerui <kernel@xen0n.name>
 Cc: loongarch@lists.linux.dev
 Signed-off-by: Rong Bao <rong.bao@csmantle.top>
+Link: https://lore.kernel.org/loongarch/20260412062828.1734637-1-rong.bao@csmantle.top/
+Signed-off-by: Rong Bao <rong.bao@csmantle.top>
 ---
  tools/perf/arch/loongarch/annotate/instructions.c | 1 +
  tools/perf/util/disasm.c                          | 1 +
  2 files changed, 2 insertions(+)
 
 diff --git a/tools/perf/arch/loongarch/annotate/instructions.c b/tools/perf/arch/loongarch/annotate/instructions.c
-index 1c3abb43c8d72..1a0a1dacebc30 100644
+index 1c3abb43c8d72197dbc8b13f5c42dfad79787e2e..1a0a1dacebc30c72e916815f872eeb45561b533f 100644
 --- a/tools/perf/arch/loongarch/annotate/instructions.c
 +++ b/tools/perf/arch/loongarch/annotate/instructions.c
 @@ -97,6 +97,7 @@ static int loongarch_jump__parse(struct arch *arch, struct ins_operands *ops, st
@@ -89,7 +92,7 @@ index 1c3abb43c8d72..1a0a1dacebc30 100644
  	.scnprintf = jump__scnprintf,
  };
 diff --git a/tools/perf/util/disasm.c b/tools/perf/util/disasm.c
-index b1be847446fea..c513db41137fa 100644
+index b1be847446fea0279043cbf19b42ff817615a5b1..c513db41137fa414aab8afe191dd209ae01508d4 100644
 --- a/tools/perf/util/disasm.c
 +++ b/tools/perf/util/disasm.c
 @@ -47,6 +47,7 @@ static int jump__scnprintf(struct ins *ins, char *bf, size_t size,
@@ -100,8 +103,6 @@ index b1be847446fea..c513db41137fa 100644
  
  static void ins__sort(struct arch *arch);
  static int disasm_line__parse(char *line, const char **namep, char **rawp);
-
-base-commit: 48273703aa25a49f85265846aacf3ac9433a035e
 -- 
 2.53.0
 

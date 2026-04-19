@@ -1,0 +1,38 @@
+From c9b8cd4f21d4ffa239d3d0a68188afc7b6a9cb0b Mon Sep 17 00:00:00 2001
+From: Hongchen Zhang <zhanghongchen@loongson.cn>
+Date: Sun, 11 May 2025 16:34:12 +0800
+Subject: [PATCH 09/69] FROMLIST: PCI: Use local_pci_probe() when best selected
+ cpu is offline
+
+When the best selected CPU is offline, work_on_cpu() will stuck forever.
+This can be happen if a node is online while all its CPUs are offline
+(we can use "maxcpus=1" without "nr_cpus=1" to reproduce it), Therefore,
+in this case, we should call local_pci_probe() instead of work_on_cpu().
+
+Cc: stable@vger.kernel.org
+Signed-off-by: Huacai Chen <chenhuacai@loongson.cn>
+Signed-off-by: Hongchen Zhang <zhanghongchen@loongson.cn>
+
+Link: https://lore.kernel.org/all/20250511083413.3326421-2-chenhuacai@loongson.cn/
+Signed-off-by: Kexy Biscuit <kexybiscuit@aosc.io>
+Signed-off-by: Mingcong Bai <jeffbai@aosc.io>
+---
+ drivers/pci/pci-driver.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/pci/pci-driver.c b/drivers/pci/pci-driver.c
+index 301a9418e38e052b478735d9499c8ba8135e32f5..d13d5e5b07ecbf6144e3665b775ab61ef0059cc1 100644
+--- a/drivers/pci/pci-driver.c
++++ b/drivers/pci/pci-driver.c
+@@ -386,7 +386,7 @@ static int pci_call_probe(struct pci_driver *drv, struct pci_dev *dev,
+ 		free_cpumask_var(wq_domain_mask);
+ 	}
+ 
+-	if (cpu < nr_cpu_ids)
++	if ((cpu < nr_cpu_ids) && cpu_online(cpu))
+ 		error = work_on_cpu(cpu, local_pci_probe, &ddi);
+ 	else
+ 		error = local_pci_probe(&ddi);
+-- 
+2.53.0
+

@@ -1,0 +1,79 @@
+From f6b806317c570b96f0af59ed65cda70d6961cd2c Mon Sep 17 00:00:00 2001
+From: Rong Bao <rong.bao@csmantle.top>
+Date: Thu, 19 Feb 2026 21:32:17 +0800
+Subject: [PATCH 68/69] CSMANTLE: loongarch: Add CONFIG_LOONGARCH_NATIVE_CPU
+
+All of GCC, Clang, and rustc supports native architecture detection on
+LoongArch platforms. Enabling this may improve instruction selection and
+static scheduling performance.
+
+The Kconfig and Makefile organization is learned from x86's config
+files.
+
+Signed-off-by: Rong Bao <rong.bao@csmantle.top>
+---
+ arch/loongarch/Kconfig  | 24 ++++++++++++++++++++++++
+ arch/loongarch/Makefile |  5 +++++
+ 2 files changed, 29 insertions(+)
+
+diff --git a/arch/loongarch/Kconfig b/arch/loongarch/Kconfig
+index d915e319c62ed2f908e11e74f60566ef05cc4ab4..41dc12066eb99034e7b4ceca32058e7fefbedba3 100644
+--- a/arch/loongarch/Kconfig
++++ b/arch/loongarch/Kconfig
+@@ -301,6 +301,17 @@ config AS_HAS_LBT_EXTENSION
+ config AS_HAS_LVZ_EXTENSION
+ 	def_bool $(as-instr,hvcl 0)
+ 
++# From arch/x86/Kconfig.cpu
++config CC_HAS_MARCH_NATIVE
++	# This flag might not be available in cross-compilers:
++	def_bool $(cc-option, -march=native)
++	# LLVM 18 has an easily triggered internal compiler error in core
++	# networking code with '-march=native' on certain systems:
++	# https://github.com/llvm/llvm-project/issues/72026
++	# LLVM 19 introduces an optimization that resolves some high stack
++	# usage warnings that only appear wth '-march=native'.
++	depends on CC_IS_GCC || CLANG_VERSION >= 190100
++
+ config CC_HAS_ANNOTATE_TABLEJUMP
+ 	def_bool $(cc-option,-mannotate-tablejump)
+ 
+@@ -623,6 +634,19 @@ config CPU_HAS_PREFETCH
+ 	bool
+ 	default y
+ 
++config LOONGARCH_NATIVE_CPU
++	bool "Build and optimize for local/native CPU"
++	depends on CC_HAS_MARCH_NATIVE
++	help
++	  Optimize for the current CPU used to compile the kernel.
++	  Use this option if you intend to build the kernel for your
++	  local machine.
++
++	  Note that such a kernel might not work optimally on a
++	  different LoongArch machine.
++
++	  If unsure, say N.
++
+ config ARCH_SUPPORTS_KEXEC
+ 	def_bool y
+ 
+diff --git a/arch/loongarch/Makefile b/arch/loongarch/Makefile
+index 8d45b860fe562b0e2ff51162d2ea280889aca946..f416ee9b6e548aff8c1ab4d436675d434f5b2a5e 100644
+--- a/arch/loongarch/Makefile
++++ b/arch/loongarch/Makefile
+@@ -124,6 +124,11 @@ KBUILD_LDFLAGS			+= $(call ld-option,-mllvm --loongarch-annotate-tablejump)
+ endif
+ endif
+ 
++ifdef CONFIG_LOONGARCH_NATIVE_CPU
++KBUILD_CFLAGS += -march=native
++KBUILD_RUSTFLAGS += -Ctarget-cpu=native
++endif
++
+ KBUILD_RUSTFLAGS		+= --target=loongarch64-unknown-none-softfloat -Ccode-model=small
+ KBUILD_RUSTFLAGS_KERNEL		+= -Zdirect-access-external-data=yes
+ KBUILD_RUSTFLAGS_MODULE		+= -Zdirect-access-external-data=no
+-- 
+2.53.0
+
