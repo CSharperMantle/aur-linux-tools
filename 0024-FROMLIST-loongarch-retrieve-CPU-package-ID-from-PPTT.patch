@@ -1,7 +1,7 @@
 From 9622ee9915e7f17bdb94493519aea27a71ec3276 Mon Sep 17 00:00:00 2001
 From: Rong Bao <rong.bao@csmantle.top>
 Date: Fri, 23 Jan 2026 23:56:06 +0800
-Subject: [PATCH 24/69] FROMLIST: loongarch: retrieve CPU package ID from PPTT
+Subject: [PATCH 24/70] FROMLIST: loongarch: retrieve CPU package ID from PPTT
  when available
 
 Currently, the LoongArch CPU topology initialization code calculates

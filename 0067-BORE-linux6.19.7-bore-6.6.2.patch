@@ -1,7 +1,7 @@
 From 2ea9c9405932b4158370d2d01ed988fd1853474c Mon Sep 17 00:00:00 2001
 From: Masahito S <firelzrd@gmail.com>
 Date: Sat, 14 Mar 2026 01:01:39 +0900
-Subject: [PATCH 67/69] BORE: linux6.19.7-bore-6.6.2
+Subject: [PATCH 67/70] BORE: linux6.19.7-bore-6.6.2
 
 Link: https://github.com/firelzrd/bore-scheduler/blob/a020594b8562909d71494f1857432f61cb75893a/patches/stable/linux-6.19-bore/0001-linux6.19.7-bore-6.6.2.patch
 ---

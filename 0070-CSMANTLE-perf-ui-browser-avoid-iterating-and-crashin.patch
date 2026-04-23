@@ -1,0 +1,30 @@
+From 537dcd89c9e6c947f13c4389487869c4f9eca0be Mon Sep 17 00:00:00 2001
+From: Rong Bao <rong.bao@csmantle.top>
+Date: Fri, 24 Apr 2026 00:09:02 +0800
+Subject: [PATCH 70/70] CSMANTLE: perf ui browser: avoid iterating and crashing
+ on an empty filtered list
+
+---
+ tools/perf/ui/browser.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/tools/perf/ui/browser.c b/tools/perf/ui/browser.c
+index dc88427b4ae5af4cfeaf52d8d57509a13f6300d3..b3d88d8a00ef0575c310f5a3f03a64444a9af402 100644
+--- a/tools/perf/ui/browser.c
++++ b/tools/perf/ui/browser.c
+@@ -514,9 +514,11 @@ unsigned int ui_browser__list_head_refresh(struct ui_browser *browser)
+ 	int row = 0;
+ 
+ 	if (browser->top == NULL || browser->top == browser->entries)
+-                browser->top = ui_browser__list_head_filter_entries(browser, head->next);
++		browser->top = ui_browser__list_head_filter_entries(browser, head->next);
+ 
+ 	pos = browser->top;
++	if (pos == NULL)
++		return 0;
+ 
+ 	list_for_each_from(pos, head) {
+ 		if (!browser->filter || !browser->filter(browser, pos)) {
+-- 
+2.53.0
+

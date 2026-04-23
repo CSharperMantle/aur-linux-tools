@@ -1,7 +1,7 @@
 From f6b806317c570b96f0af59ed65cda70d6961cd2c Mon Sep 17 00:00:00 2001
 From: Rong Bao <rong.bao@csmantle.top>
 Date: Thu, 19 Feb 2026 21:32:17 +0800
-Subject: [PATCH 68/69] CSMANTLE: loongarch: Add CONFIG_LOONGARCH_NATIVE_CPU
+Subject: [PATCH 68/70] CSMANTLE: loongarch: Add CONFIG_LOONGARCH_NATIVE_CPU
 
 All of GCC, Clang, and rustc supports native architecture detection on
 LoongArch platforms. Enabling this may improve instruction selection and

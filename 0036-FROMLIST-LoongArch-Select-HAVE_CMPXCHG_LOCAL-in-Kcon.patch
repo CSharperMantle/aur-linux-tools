@@ -1,7 +1,7 @@
 From 7cbd3770dabfe34142ce7ef3c665bd962298f5b8 Mon Sep 17 00:00:00 2001
 From: Huacai Chen <chenhuacai@loongson.cn>
 Date: Tue, 23 Dec 2025 16:12:28 +0800
-Subject: [PATCH 36/69] FROMLIST: LoongArch: Select HAVE_CMPXCHG_LOCAL in
+Subject: [PATCH 36/70] FROMLIST: LoongArch: Select HAVE_CMPXCHG_LOCAL in
  Kconfig
 
 LoongArch has already implemented cmpxchg_local(), this_cpu_cmpxchg()

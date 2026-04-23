@@ -1,7 +1,7 @@
 From 1bd17937ab1500c505c57709b5a1d85f4d52c198 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
 Date: Thu, 18 Sep 2025 13:58:56 -0700
-Subject: [PATCH 14/69] FROMLIST: PCI: Release BAR0 of an integrated bridge to
+Subject: [PATCH 14/70] FROMLIST: PCI: Release BAR0 of an integrated bridge to
  allow GPU BAR resize
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8

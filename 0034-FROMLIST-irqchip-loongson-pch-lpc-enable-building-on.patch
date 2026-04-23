@@ -1,7 +1,7 @@
 From 8c323ed05d694f0ce712bd15e235ed619d3dd6cd Mon Sep 17 00:00:00 2001
 From: Icenowy Zheng <zhengxingda@iscas.ac.cn>
 Date: Fri, 16 Jan 2026 01:45:01 +0800
-Subject: [PATCH 34/69] FROMLIST: irqchip/loongson-pch-lpc: enable building on
+Subject: [PATCH 34/70] FROMLIST: irqchip/loongson-pch-lpc: enable building on
  MIPS Loongson64
 
 As the driver can now support OF-based platforms, it's now possible to

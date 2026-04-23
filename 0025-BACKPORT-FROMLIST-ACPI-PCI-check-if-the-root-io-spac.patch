@@ -1,7 +1,7 @@
 From 1c9b7c1082192bae40e949edd7bd45244227dd54 Mon Sep 17 00:00:00 2001
 From: Miao Wang <shankerwangmiao@gmail.com>
 Date: Wed, 14 Aug 2024 20:09:15 +0800
-Subject: [PATCH 25/69] BACKPORT: FROMLIST: ACPI: PCI: check if the root io
+Subject: [PATCH 25/70] BACKPORT: FROMLIST: ACPI: PCI: check if the root io
  space is page aligned
 
 When the IO resource given by _CRS method is not page aligned, especially

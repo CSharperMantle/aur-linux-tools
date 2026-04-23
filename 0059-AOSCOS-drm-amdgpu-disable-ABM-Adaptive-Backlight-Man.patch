@@ -1,7 +1,7 @@
 From b53ac5d34e82bc9d93c7ad676a4e2fd9c75a3b20 Mon Sep 17 00:00:00 2001
 From: Mingcong Bai <jeffbai@aosc.io>
 Date: Thu, 24 Oct 2024 20:53:23 +0800
-Subject: [PATCH 59/69] AOSCOS: drm: amdgpu: disable ABM (Adaptive Backlight
+Subject: [PATCH 59/70] AOSCOS: drm: amdgpu: disable ABM (Adaptive Backlight
  Management) by default
 
 Per report from a contributor, since v6.9, ABM was set to be automatically

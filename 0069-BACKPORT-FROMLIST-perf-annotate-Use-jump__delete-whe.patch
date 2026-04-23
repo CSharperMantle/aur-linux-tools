@@ -1,7 +1,7 @@
 From 248d046b69bac5cf8faa74e651fc1318b8c9716d Mon Sep 17 00:00:00 2001
 From: Rong Bao <rong.bao@csmantle.top>
 Date: Sun, 12 Apr 2026 10:18:08 +0800
-Subject: [PATCH 69/69] BACKPORT: FROMLIST: perf annotate: Use jump__delete
+Subject: [PATCH 69/70] BACKPORT: FROMLIST: perf annotate: Use jump__delete
  when freeing LoongArch jumps
 
 Currently, the initialization of loongarch_jump_ops does not contain an

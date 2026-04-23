@@ -1,7 +1,7 @@
 From 479f7ee62e665e8c0c2da939b75c9faa2b74987c Mon Sep 17 00:00:00 2001
 From: Rong Bao <rong.bao@csmantle.top>
 Date: Sun, 12 Apr 2026 00:31:45 +0200
-Subject: [PATCH 03/69] Arch Linux kernel v6.19.13-arch0
+Subject: [PATCH 03/70] Arch Linux kernel v6.19.13-arch0
 
 ---
  Makefile | 2 +-
