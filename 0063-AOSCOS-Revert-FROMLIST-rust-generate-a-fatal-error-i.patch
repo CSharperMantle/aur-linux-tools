@@ -1,0 +1,31 @@
+From 40bdd74bfc856c638d4a750e0972a659e1ecebfc Mon Sep 17 00:00:00 2001
+From: Mingcong Bai <jeffbai@aosc.io>
+Date: Tue, 23 Dec 2025 20:08:10 +0800
+Subject: [PATCH 63/66] AOSCOS: Revert "FROMLIST: rust: generate a fatal error
+ if BINDGEN_TARGET is undefined"
+
+This reverts "FROMLIST: rust: generate a fatal error if BINDGEN_TARGET is
+undefined" as it breaks build on architectures that do not HAVE_RUST.
+
+Link: https://lore.kernel.org/all/6bd26802-e3ce-43e2-b28d-f23e13492458@aosc.io/
+Signed-off-by: Mingcong Bai <jeffbai@aosc.io>
+---
+ scripts/Makefile.rust | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/scripts/Makefile.rust b/scripts/Makefile.rust
+index b219244cd05104da59443390f2c00a7eafd37933..5c12b4b8c8b65f4c4a42aea09a413738339985ef 100644
+--- a/scripts/Makefile.rust
++++ b/scripts/Makefile.rust
+@@ -6,8 +6,4 @@ BINDGEN_TARGET_loongarch	:= loongarch64-linux-gnusf
+ BINDGEN_TARGET_um	:= $(BINDGEN_TARGET_$(SUBARCH))
+ BINDGEN_TARGET		:= $(BINDGEN_TARGET_$(SRCARCH))
+ 
+-ifeq ($(BINDGEN_TARGET),)
+-$(error add '--target=' option to scripts/Makefile.rust)
+-else
+ export BINDGEN_TARGET
+-endif
+-- 
+2.54.0
+
