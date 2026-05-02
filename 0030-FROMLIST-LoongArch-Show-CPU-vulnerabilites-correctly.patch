@@ -1,0 +1,48 @@
+From df92def870888b88584da1b9dc67ed4ae11a097b Mon Sep 17 00:00:00 2001
+From: Huacai Chen <chenhuacai@loongson.cn>
+Date: Sat, 11 Apr 2026 10:05:22 +0800
+Subject: [PATCH 30/69] FROMLIST: LoongArch: Show CPU vulnerabilites correctly
+
+Most LoongArch processors are vulnerable to Spectre-V1 Proof-of-Concept
+(PoC). And the generic mechanism, __user pointer sanitization, can be
+used as a mitigation. This means to use array_index_nospec() to prevent
+out of boundry access in syscall and other critical paths.
+
+Implement the arch-specific cpu_show_spectre_v1() to show CPU Spectre-V1
+vulnerabilites correctly.
+
+Cc: stable@vger.kernel.org
+Link: https://cc-sw.com/chinese-loongarch-architecture-evaluation-part-3-of-3/
+Signed-off-by: Huacai Chen <chenhuacai@loongson.cn>
+
+Link: https://lore.kernel.org/loongarch/20260411020522.2779250-1-chenhuacai@loongson.cn/
+Signed-off-by: Mingcong Bai <jeffbai@aosc.io>
+---
+ arch/loongarch/kernel/cpu-probe.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/arch/loongarch/kernel/cpu-probe.c b/arch/loongarch/kernel/cpu-probe.c
+index 5fcf2672172f1dde8064b0c4fb8acc50980d0512..1447465bb75e30c80e5015d9c1a8710228454d1d 100644
+--- a/arch/loongarch/kernel/cpu-probe.c
++++ b/arch/loongarch/kernel/cpu-probe.c
+@@ -7,6 +7,7 @@
+ #include <linux/init.h>
+ #include <linux/kernel.h>
+ #include <linux/ptrace.h>
++#include <linux/cpu.h>
+ #include <linux/smp.h>
+ #include <linux/stddef.h>
+ #include <linux/export.h>
+@@ -439,3 +440,9 @@ void cpu_probe(void)
+ 
+ 	cpu_report();
+ }
++
++ssize_t cpu_show_spectre_v1(struct device *dev,
++			    struct device_attribute *attr, char *buf)
++{
++	return sysfs_emit(buf, "Mitigation: __user pointer sanitization\n");
++}
+-- 
+2.54.0
+
